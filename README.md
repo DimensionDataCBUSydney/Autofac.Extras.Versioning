@@ -37,4 +37,4 @@ This will make sure you get a component that was registered as being the impleme
 TODO
 ===========
 
-Add an extension method.
+Add an extension method for registering Versioned instead of using Keyed<T>
