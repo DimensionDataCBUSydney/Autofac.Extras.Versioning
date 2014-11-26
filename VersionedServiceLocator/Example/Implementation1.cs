@@ -1,6 +1,9 @@
 ﻿namespace VersionedServiceLocator
 {
-	[VersionedComponent(RequiredVersion = VersionRange.Version1)]
+	/// <summary>
+	/// Implementation of <see cref="IDependentInterface"/> Version 1.
+	/// </summary>
+	[VersionedComponent(VersionRange.Version1)]
 	public class Implementation1
 		: IDependentInterface
 	{

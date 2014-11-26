@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using Autofac;
-using Autofac.Builder;
-using Autofac.Core;
 using Autofac.Extras.Attributed;
-using Autofac.Features.Metadata;
-using Autofac.Features.Scanning;
+
 
 namespace VersionedServiceLocator
 {
@@ -91,25 +86,4 @@ namespace VersionedServiceLocator
 	        throw new NotSupportedException("Multiple versioned dependencies not supported.");
         }
     }
-
-	public static class VersionExtensions
-	{
-		public static IRegistrationBuilder<TLimit, TReflectionActivatorData, TRegistrationStyle>
-			WithVersionFilter<TLimit, TReflectionActivatorData, TRegistrationStyle>(
-				this IRegistrationBuilder<TLimit, TReflectionActivatorData, TRegistrationStyle> builder)
-			where TReflectionActivatorData : ReflectionActivatorData
-		{
-			if (builder == null)
-			{
-				throw new ArgumentNullException("builder");
-			}
-			return builder.WithParameter(
-				(p, c) => p.GetCustomAttributes(true).OfType<ParameterFilterAttribute>().Any(),
-				(p, c) =>
-				{
-					var filter = p.GetCustomAttributes(true).OfType<ParameterFilterAttribute>().First();
-					return filter.ResolveParameter(p, c);
-				});
-		}
-	}
 }
